@@ -1,0 +1,15 @@
+from PIL import Image, ImageDraw, ImageFont
+
+def write_text(text, save_loc_no_ext):
+    # canvas size
+    font_size =26
+    fnt = ImageFont.truetype('arial', font_size)
+    img = Image.new('RGB', (15*len(text), int(font_size *.9)), color=(255, 255, 255))
+
+    d = ImageDraw.Draw(img)
+    # x then y
+    d.text((2, -3), text, font=fnt, fill=(0, 0, 0), spacing=5)
+    # d.multiline_text((10,10), "Hello\nWorld", font=fnt, fill=(0, 0, 0))
+    img.save(f'{save_loc_no_ext}.png')
+
+# write_text("Cr")
