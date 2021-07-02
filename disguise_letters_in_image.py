@@ -5,12 +5,11 @@ from collections import defaultdict
 from itertools import combinations
 
 
-
 def disguise(filename, password):
     with open(f"{filename}_as_data.txt") as f:
         a = f.read().split("\n")
 
-    a= list(map(list, a))
+    a = list(map(list, a))
     # blacklist = "evergreen"
     blacklist = list(set(password))
     allowed = list(set(string.ascii_lowercase) - set(blacklist))
@@ -25,7 +24,8 @@ def disguise(filename, password):
     with open(f"{filename}_jumbled.txt", 'w') as f:
         print("\n".join(a), file=f)
 
-def diguise_multiple(filenames : List[str], message: List[str], output_file="multiple_output", num_letters_per=3):
+
+def diguise_multiple(filenames: List[str], message: List[str], output_file="multiple_output", num_letters_per=3):
     positions_needed = defaultdict(set)
     pos_to_num = defaultdict(set)
     num_files = len(filenames)
@@ -33,9 +33,9 @@ def diguise_multiple(filenames : List[str], message: List[str], output_file="mul
     max_height = 0
     for img_num, file in enumerate(filenames):
         with open(file) as f:
-            a=  f.read().strip().split("\n")
-        max_height = max(max_height,len(a))
-        max_width = max(max_width,len(a[0]))
+            a = f.read().strip().split("\n")
+        max_height = max(max_height, len(a))
+        max_width = max(max_width, len(a[0]))
         # print(a)
         for y in range(len(a)):
             for x in range(len(a[0])):
@@ -62,8 +62,8 @@ def diguise_multiple(filenames : List[str], message: List[str], output_file="mul
     # print(combos)
     letters_used_for_each = defaultdict(list)
     available_letters = set(string.ascii_letters)
-    # pooled = reversed(singles + combos)
-    pooled = singles
+    pooled = reversed(singles + combos)
+    # pooled = singles
     for num_group in pooled:
         chosen = (random.sample(sorted(available_letters), num_letters_per))
         letters_used_for_each[num_group] += chosen
@@ -88,6 +88,7 @@ def diguise_multiple(filenames : List[str], message: List[str], output_file="mul
                 cur = cur[0]
             options = [letters_used_for_each[z] for z in pos_to_num[(y, x)]]
             # output[y][x] = random.choice(sorted(letters_used_for_each[cur]))
+            output[y][x] = random.choice(options)
     answers = defaultdict(list)
     # for i in range(num_files):
     for j in letters_used_for_each:
