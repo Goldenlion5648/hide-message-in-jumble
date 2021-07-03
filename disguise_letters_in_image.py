@@ -60,23 +60,26 @@ def diguise_multiple(filenames: List[str], message: List[str], output_file="mult
     singles = list(range(num_files))
     # print(combos + singles)
     # print(combos)
-    letters_used_for_each = defaultdict(list)
+    letters_used_for_each_group = defaultdict(list)
     available_letters = set(string.ascii_letters)
+    if num_files > 3:
+        available_letters += set("@!#$"+string.digits)
     pooled = reversed(singles + combos)
     # pooled = singles
     for num_group in pooled:
         chosen = (random.sample(sorted(available_letters), num_letters_per))
-        letters_used_for_each[num_group] += chosen
+        letters_used_for_each_group[num_group] += chosen
         available_letters -= set(chosen)
 
-    for k in letters_used_for_each:
-        print(k, "".join(letters_used_for_each[k]))
+    for k in letters_used_for_each_group:
+        print(k, "".join(letters_used_for_each_group[k]))
     # print(pos_to_num)
 
     # exit()
     output = [["0"]*max_width for i in range(max_height)]
     available_letters = sorted(available_letters)
     print("remaining available_letters", len(available_letters))
+    times_used = defaultdict(int)
     for y in range(len(output)):
         for x in range(len(output[0])):
             if (y, x) not in pos_to_num:
@@ -86,19 +89,26 @@ def diguise_multiple(filenames: List[str], message: List[str], output_file="mult
             cur = tuple(sorted(cur))
             if len(cur) == 1:
                 cur = cur[0]
-            options = [letters_used_for_each[z] for z in pos_to_num[(y, x)]]
-            # output[y][x] = random.choice(sorted(letters_used_for_each[cur]))
-            output[y][x] = random.choice(options)
+            # options = [letters_used_for_each[z] for z in pos_to_num[(y, x)]]
+            # times_used[tuple(sorted(pos_to_num[(y, x)]))] += 1
+            output[y][x] = random.choice(sorted(letters_used_for_each_group[cur]))
+            # output[y][x] = random.choice(options)
     answers = defaultdict(list)
     # for i in range(num_files):
-    for j in letters_used_for_each:
+    for j in letters_used_for_each_group:
         try:
             for num in j:
-                answers[num].extend(letters_used_for_each[j])
+                answers[num].extend(letters_used_for_each_group[j])
         except:
-            answers[j].extend(letters_used_for_each[j])
+            answers[j].extend(letters_used_for_each_group[j])
     for k, v in answers.items():
         print(k, ":", "".join(v))
+
+    # for k, v in times_used.items():
+    #     print(k, ":", v)
+    print("times_used", len(times_used))
+    # print("letters_used_for_each", len(letters_used_for_each))
+    # print("punc", len(string.punctuation))
     with open(f"{output_file}.txt", 'w') as f:
         for line in output:
             print(*line, sep='', file=f)
