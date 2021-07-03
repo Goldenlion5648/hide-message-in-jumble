@@ -14,3 +14,7 @@ But wait, there's more! You can hide more than one message! Using the same text 
 # Searching for key
 
 I recommend using a regex (most text editors support it). Once regex is enabled, just put the key inside square brackets i.e. `[jsmHGSXRWJ]` 
+
+#Notes
+
+Due to character limitations, messages can only have a max of 6 words
