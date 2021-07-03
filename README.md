@@ -10,3 +10,7 @@ but with the knowledge of the correct key (in this case `jsmHGSXRWJ` unordered),
 But wait, there's more! You can hide more than one message! Using the same text jumble as before, but this time with the key `jsmHGdeEFl`:
 
 <img src="https://user-images.githubusercontent.com/32916571/124366246-47661700-dc1c-11eb-9eea-f9ec529508b2.png" width="400" height="400">
+
+# Searching for key
+
+I recommend using a regex (most text editors support it). Once regex is enabled, just put the key inside square brackets i.e. `[jsmHGSXRWJ]` 
