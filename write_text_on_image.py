@@ -5,7 +5,7 @@ def write_text(text, save_loc_no_ext, x_offset=0, y_offset=0):
     font_size =26
     fnt = ImageFont.truetype('arial', font_size)
     # fnt = ImageFont.load_default()
-    print("length", fnt.getsize("test123"))
+    # print("length", fnt.getsize("test123"))
     printed_size = fnt.getsize(text)
     # text_size = fnt.textlength(text)
     # print("text_size", text_size)

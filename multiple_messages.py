@@ -9,6 +9,7 @@ import random
 file = "multiple"
 message = "this is cool right man"
 message = "does this work?"
+message = "the answer no"
 filenames = []
 random.seed(5648)
 for i, word in enumerate(message.split()):
@@ -21,7 +22,7 @@ for i, word in enumerate(message.split()):
     get_data(cur)
     extended = cur + "_as_data.txt"
     filenames.append(extended)
-diguise_multiple(filenames, message, num_letters_per=7-len(message.split()))
+diguise_multiple(filenames)
     # break
     # disguise(file, password)
 # print("test")
